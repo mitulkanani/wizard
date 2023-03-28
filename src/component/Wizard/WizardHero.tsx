@@ -12,7 +12,7 @@ const WizardHero = ({
   return (
     <>
       <div
-        className="overflow-scroll bg-[#F5F7FB]"
+        className="flex items-center justify-center overflow-scroll bg-[#F5F7FB]"
         style={{
           minHeight: 'calc(100vh - 90px)',
         }}

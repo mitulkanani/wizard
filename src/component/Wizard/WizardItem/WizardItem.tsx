@@ -201,15 +201,12 @@ const wizardItem = [
 const WizardItem = ({ setWizardSectionType }: WizardItemProps) => {
   const [questionData, setQuestionData] = useState(wizardItem);
   const [openState, setOpenState] = useState(1);
-  const [error, setError] = useState('');
 
   const handleBackClick = () => {
     if (openState === 1) {
       setWizardSectionType(WIZARDHERO);
-      setError('');
     } else {
       setOpenState(openState - 1);
-      setError('');
     }
   };
 
@@ -227,15 +224,7 @@ const WizardItem = ({ setWizardSectionType }: WizardItemProps) => {
               questionData?.length &&
               questionData.map(
                 (
-                  {
-                    id,
-                    label,
-                    option,
-                    multiSelect,
-                    required,
-                    backCta,
-                    continueCta,
-                  },
+                  { id, label, option, multiSelect, backCta, continueCta },
                   i
                 ) => (
                   <div
@@ -316,7 +305,6 @@ const WizardItem = ({ setWizardSectionType }: WizardItemProps) => {
                                             },
                                           });
                                           setQuestionData(updated);
-                                          setError('');
                                         } else {
                                           let previousSelect = 0;
                                           previousSelect = option.findIndex(
@@ -342,7 +330,6 @@ const WizardItem = ({ setWizardSectionType }: WizardItemProps) => {
                                             },
                                           });
                                           setQuestionData(updated);
-                                          setError('');
                                         }
                                       }}
                                     >
@@ -363,13 +350,6 @@ const WizardItem = ({ setWizardSectionType }: WizardItemProps) => {
                           <div>
                             <div className="w-full md:left-auto md:bottom-24 md:max-w-3xl lg:max-w-4xl">
                               <div className="flex flex-col gap-2">
-                                {error && (
-                                  <div className="flex justify-center md:justify-end">
-                                    <p className="mr-0 text-sm text-red-500 md:mr-5">
-                                      {error}
-                                    </p>
-                                  </div>
-                                )}
                                 <div className="flex w-auto flex-row items-center justify-center md:justify-between">
                                   <div className="hidden md:flex">
                                     <BackButton
@@ -400,12 +380,6 @@ const WizardItem = ({ setWizardSectionType }: WizardItemProps) => {
                                       className="!px-11"
                                       onClick={() => {
                                         if (
-                                          required &&
-                                          option.filter((item) => item.selected)
-                                            .length === 0
-                                        ) {
-                                          setError('Please Select Option');
-                                        } else if (
                                           openState === questionData?.length
                                         ) {
                                           setWizardSectionType(
@@ -413,7 +387,6 @@ const WizardItem = ({ setWizardSectionType }: WizardItemProps) => {
                                           );
                                         } else {
                                           setOpenState(openState + 1);
-                                          setError('');
                                         }
                                       }}
                                     >
